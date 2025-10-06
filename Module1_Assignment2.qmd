@@ -1,0 +1,68 @@
+---
+title: "Module1_Assignment2"
+author: "Alper Celebioglu"
+format:
+  html:
+    embed-resources: true
+editor: visual
+---
+
+```{r}
+library(tidyverse)
+library(skimr)
+```
+
+1.  Diamonds data set
+
+```{r}
+diamonddata = diamonds
+```
+
+2\.
+
+```{r}
+nrow(diamonddata)
+ncol(diamonddata)
+```
+
+3\.
+
+```{r}
+ggplot(diamonddata, aes(x=carat, y=price)) + geom_point()
+```
+
+4, 5
+
+```{r}
+ggplot(diamonddata, aes(x=carat, y=price, color=cut)) + geom_point() + facet_wrap(~color)
+```
+
+6
+
+```{r}
+inventory<- read_csv("inventoryData.csv")
+```
+
+```{r}
+skim(inventory)
+```
+
+```{r}
+inventoryA <- inventory %>% filter(Supplier == "A")
+```
+
+```{r}
+skim(inventoryA)
+```
+
+```{r}
+inventoryA = inventoryA %>% mutate(OnHandRatio = `On Hand` / `Annual Demand`)
+```
+
+```{r}
+avg_cost = inventoryA %>% group_by(`Item SKU`) %>% summarise(SKUAvgCost =mean(`Cost per Unit ($)`))
+```
+
+```{r}
+avg_cost %>% filter(`Item SKU` == "011")
+```
